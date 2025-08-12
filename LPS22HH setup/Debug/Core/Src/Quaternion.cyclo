@@ -1,0 +1,2 @@
+../Core/Src/Quaternion.c:10:6:Quaternion_Update	3
+../Core/Src/Quaternion.c:51:7:invSqrt	1
