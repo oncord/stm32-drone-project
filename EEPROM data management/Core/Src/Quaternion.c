@@ -1,0 +1,58 @@
+#include "Quaternion.h"
+
+#define _180_DIV_PI 57.295779515f // = 180 / PI
+
+float BNO080_Roll;
+float BNO080_Pitch;
+float BNO080_Yaw;
+
+void Quaternion_Update(float* q)
+{
+	float q1, q2, q3, q4;
+	float roll, pitch, yaw;
+	float norm;
+
+	norm = invSqrt(q[0]*q[0] + q[1]*q[1] + q[2]*q[2] + q[3]*q[3]);    // normalize quaternion
+
+	q1 = q[0] * norm; //x
+	q2 = q[1] * norm; //y
+	q3 = q[2] * norm; //z
+	q4 = q[3] * norm; //w
+
+	pitch = atan2f(2.0f * (q2*q3 + q1*q4), q1*q1 + q2*q2 - q3*q3 - q4*q4);
+	roll  = -asinf(2.0f * (q2*q4 - q1*q3));
+	yaw   = atan2f(2.0f * (q1*q2 + q3*q4), q1*q1 - q2*q2 - q3*q3 + q4*q4);
+
+	pitch *= _180_DIV_PI;
+	roll  *= _180_DIV_PI;
+	yaw   *= _180_DIV_PI;
+
+	if(yaw >=0)
+		yaw = 360.f - yaw;
+	else
+		yaw = -yaw;
+
+
+	if(pitch >=0)
+		pitch = 180.f - pitch;
+	else
+		pitch = -(pitch+ 180.f);
+
+	BNO080_Roll = roll;
+	BNO080_Pitch = pitch;
+	BNO080_Yaw = yaw;
+}
+
+// Fast inverse square-root
+// See: http://en.wikipedia.org/wiki/Fast_inverse_square_root
+
+float invSqrt(float x)
+{
+	float halfx = 0.5f * x;
+	float y = x;
+	long i = *(long*)&y;
+	i = 0x5f3759df - (i>>1);
+	y = *(float*)&i;
+	y = y * (1.5f - (halfx * y * y));
+	return y;
+}
