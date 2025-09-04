@@ -11,4 +11,4 @@ Design and build a **high-performance, low-cost quadcopter** with the following 
 
 Flight Control Loop Diagram (Cascade PID)
 
-![PID loop](loop.png)
+![PID loop](pidloop.png)
