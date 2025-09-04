@@ -1,4 +1,4 @@
-### Personal Project: Drone Assembly & Flight Controller Development
+### Personal Project: Drone Assembly & FC Firmware Development
 
 **Objective:**  
 Teach myself drone assembly and flight controller development using online resources.
