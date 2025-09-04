@@ -8,3 +8,7 @@ Design and build a **high-performance, low-cost quadcopter** with the following 
 - Remote control capability  
 - GPS integration  
 - Custom flight controller developed in **C**
+
+Flight Control Loop Diagram (Cascade PID)
+
+![FC Loop Diagram]()
